@@ -130,10 +130,10 @@ void Behavior::step() noexcept
 // TODO: This is a rough estimate, improve by looking into the sensor specifications.
 double Behavior::convertIrVoltageToDistance(float voltage) const noexcept
 {
-  double voltageDividerR1 = 1000.0;
-  double voltageDividerR2 = 1000.0;
-
-  double sensorVoltage = (voltageDividerR1 + voltageDividerR2) / voltageDividerR2 * voltage;
-  double distance = (2.5 - sensorVoltage) / 0.07;
-  return distance;
+  float v = voltage;
+  double a0 = -6.182; 
+  double a1 = 37.93;
+  double a2 = -76.52;
+  double a3 = 57.24;
+  double distance = a3 + a2*v + a1*v*v + a0*v*v*v; 
 }
